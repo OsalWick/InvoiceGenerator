@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sun and Shade Clothing - Invoice Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container form-container">
+        <div class="logo-container">
+            <img src="images/logo.png" alt="Sun and Shade Clothing Logo" class="logo">
+        </div>
+        <h1>Invoice Generator</h1>
+        <form id="invoiceForm">
+            <div class="form-group">
+                <label for="invoiceNumber">Invoice Number:</label>
+                <input type="text" id="invoiceNumber" required>
+            </div>
+            <div class="form-group">
+                <label for="clientName">Client Name:</label>
+                <input type="text" id="clientName" required>
+            </div>
+            <div class="form-group">
+                <label for="orderType">Order Type:</label>
+                <select id="orderType" required>
+                    <option value="normal">Normal Order</option>
+                    <option value="rush">Rush Order</option>
+                    <option value="large">Large Order</option>
+                    <option value="test">Test Order</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Payment Type:</label>
+                <div class="payment-options">
+                    <div class="payment-option">
+                        <input type="radio" id="prePaid" name="paymentType" value="Pre-Paid" required>
+                        <label for="prePaid">Pre-Paid</label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" id="paidOnDelivery" name="paymentType" value="Paid-on-Delivery">
+                        <label for="paidOnDelivery">Paid-on-Delivery</label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" id="paidOnTab" name="paymentType" value="Paid-on-Tab">
+                        <label for="paidOnTab">Paid-on-Tab</label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" id="otherPayment" name="paymentType" value="Other Payment">
+                        <label for="otherPayment">Other Payment</label>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Items</h3>
+            <div id="itemsContainer" class="items-container">
+                <div class="item-row">
+                    <input type="text" placeholder="Item Description" required>
+                    <input type="number" placeholder="Quantity" min="1" required>
+                    <input type="number" placeholder="Unit Price" step="0.01" required>
+                    <button type="button" onclick="removeItem(this)" class="remove-btn">Remove</button>
+                </div>
+            </div>
+
+            <div class="form-buttons">
+                <button type="button" onclick="addItem()" class="add-btn">Add Item</button>
+                <button type="submit" class="generate-btn">Generate Invoice</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="container invoice-page" id="invoicePage" style="display: none;">
+        <div class="invoice-header">
+            <div class="company-info">
+                <div class="logo-container">
+                    <img src="images/logo.png" alt="Sun and Shade Clothing Logo" class="logo">
+                </div>
+                <h2>Sun and Shade Clothing</h2>
+                <p>Email: ruwanmalikumarasena@gmail.com</p>
+                <p>Tel: (+94) 777 311 356</p>
+            </div>
+            <div class="invoice-details">
+                <p>Invoice #: <span id="displayInvoiceNumber"></span></p>
+                <p>Date: <span id="displayDate"></span></p>
+                <p>Order Type: <span id="displayOrderType"></span></p>
+                <p>Payment Type: <span id="displayPaymentType"></span></p>
+                <h3>Bill to:</h3>
+                <p id="displayClientName"></p>
+            </div>
+        </div>
+
+        <table class="invoice-table">
+            <thead>
+                <tr>
+                    <th scope="col">Description</th>
+                    <th scope="col">Qty</th>
+                    <th scope="col">Unit Price</th>
+                    <th scope="col">Amount</th>
+                </tr>
+            </thead>
+            <tbody id="invoiceItems">
+            </tbody>
+        </table>
+
+        <div class="totals">
+            <p>Subtotal: LKR <span id="subtotal">0.00</span></p>
+            <p>Total: LKR <span id="total">0.00</span></p>
+            <p>Amount due: LKR <span id="amountDue">0.00</span></p>
+        </div>
+
+        <button type="button" class="print-button" onclick="window.print()">Print Invoice</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

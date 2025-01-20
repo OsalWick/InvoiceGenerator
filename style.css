@@ -1,0 +1,270 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --accent-color: #e67e22;
+    --background-color: #f5f6fa;
+    --text-color: #2c3e50;
+    --border-color: #bdc3c7;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    max-width: 200px;
+    height: auto;
+}
+
+h1 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--secondary-color);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+    font-size: 0.95rem;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.1);
+}
+
+.items-container {
+    margin-bottom: 30px;
+}
+
+.item-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+@media (max-width: 768px) {
+    .item-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    
+    .container {
+        padding: 15px;
+    }
+    
+    .invoice-header {
+        flex-direction: column;
+    }
+}
+
+button {
+    padding: 12px 24px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: transform 0.1s ease, background-color 0.2s ease;
+}
+
+.remove-btn {
+    background-color: #e74c3c;
+}
+
+.add-btn {
+    background-color: var(--accent-color);
+}
+
+.generate-btn {
+    background-color: var(--primary-color);
+}
+
+button:hover {
+    transform: translateY(-1px);
+    opacity: 0.9;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* Invoice Styles */
+.invoice-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.company-info {
+    margin-bottom: 20px;
+}
+
+.invoice-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 30px;
+}
+
+.invoice-table th,
+.invoice-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.invoice-table th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.totals {
+    text-align: right;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid var(--border-color);
+}
+
+@media print {
+    @page {
+        margin: 2cm;
+    }
+
+    body {
+        background: white;
+        padding: 0;
+        font-size: 12pt;
+    }
+    
+    .form-container {
+        display: none;
+    }
+    
+    .container {
+        box-shadow: none;
+        padding: 0;
+        max-width: 100%;
+    }
+    
+    .print-button {
+        display: none;
+    }
+
+    .invoice-header {
+        margin-bottom: 30pt;
+    }
+
+    .invoice-table {
+        border: 1px solid #ddd;
+        margin: 20pt 0;
+    }
+
+    .invoice-table th {
+        background-color: #f8f9fa !important;
+        color: #000 !important;
+        border: 1px solid #ddd;
+    }
+
+    .invoice-table td {
+        border: 1px solid #ddd;
+    }
+
+    .totals {
+        margin-top: 20pt;
+        border-top: 1px solid #ddd;
+    }
+
+    .logo {
+        max-width: 150px;
+    }
+}
+
+/* Add this near the top of your CSS file, after the container class */
+.invoice-page {
+    display: none;  /* This hides the invoice page by default */
+}
+
+/* Update the form container styles */
+.form-container {
+    background-color: white;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.payment-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.payment-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.payment-option input[type="radio"] {
+    width: auto;
+    margin: 0;
+}
+
+.payment-option label {
+    margin: 0;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .payment-options {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+}
