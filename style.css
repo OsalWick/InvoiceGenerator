@@ -81,7 +81,7 @@ select:focus {
 
 .item-row {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr auto;
+    grid-template-columns: 2fr 1fr 1fr 1fr auto;
     gap: 10px;
     margin-bottom: 16px;
 }
@@ -89,7 +89,6 @@ select:focus {
 @media (max-width: 768px) {
     .item-row {
         grid-template-columns: 1fr;
-        gap: 8px;
     }
     
     .container {
@@ -400,5 +399,37 @@ button:hover {
         box-shadow: none;
         margin: 0;
         padding: 20px;
+    }
+}
+
+/* Add these new styles */
+.size-select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+    font-size: 0.95rem;
+}
+
+.item-summary {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    text-align: right;
+}
+
+.item-summary p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+}
+
+@media print {
+    .item-summary {
+        background-color: transparent;
+        padding: 10px 0;
+        font-size: 9pt;
     }
 }
