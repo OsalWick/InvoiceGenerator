@@ -67,19 +67,37 @@
 
     <div class="container invoice-page" id="invoicePage" style="display: none;">
         <div class="invoice-header">
-            <div class="company-info">
-                <div class="logo-container">
+            <div class="header-grid">
+                <div class="company-logo">
                     <img src="images/logo.png" alt="Sun and Shade Clothing Logo" class="logo">
                 </div>
-                <h2>Sun and Shade Clothing</h2>
-                <p>Email: ruwanmalikumarasena@gmail.com</p>
-                <p>Tel: (+94) 777 311 356</p>
+                <div class="company-details">
+                    <h2>Sun and Shade Clothing</h2>
+                    <p>Email: ruwanmalikumarasena@gmail.com</p>
+                    <p>Tel: (+94) 777 311 356</p>
+                </div>
+                <div class="invoice-meta">
+                    <table class="meta-table">
+                        <tr>
+                            <td><strong>Invoice #:</strong></td>
+                            <td><span id="displayInvoiceNumber"></span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Date:</strong></td>
+                            <td><span id="displayDate"></span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Order Type:</strong></td>
+                            <td><span id="displayOrderType"></span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Payment:</strong></td>
+                            <td><span id="displayPaymentType"></span></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-            <div class="invoice-details">
-                <p>Invoice #: <span id="displayInvoiceNumber"></span></p>
-                <p>Date: <span id="displayDate"></span></p>
-                <p>Order Type: <span id="displayOrderType"></span></p>
-                <p>Payment Type: <span id="displayPaymentType"></span></p>
+            <div class="bill-to">
                 <h3>Bill to:</h3>
                 <p id="displayClientName"></p>
             </div>
@@ -90,8 +108,8 @@
                 <tr>
                     <th scope="col">Description</th>
                     <th scope="col">Qty</th>
-                    <th scope="col">Unit Price</th>
-                    <th scope="col">Amount</th>
+                    <th scope="col">Price (LKR)</th>
+                    <th scope="col">Amount (LKR)</th>
                 </tr>
             </thead>
             <tbody id="invoiceItems">
@@ -105,7 +123,7 @@
             <p><strong>Amount due: LKR <span id="amountDue">0.00</span></strong></p>
         </div>
 
-        <button type="button" class="print-button" onclick="window.print()">Print Invoice</button>
+        <button type="button" class="print-button" onclick="window.print()">Print</button>
     </div>
 
     <script src="script.js"></script>
