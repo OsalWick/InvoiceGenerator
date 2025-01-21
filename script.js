@@ -1,26 +1,32 @@
 function addItem() {
-    const container = document.getElementById('itemsContainer');
+    const itemsContainer = document.getElementById('itemsContainer');
     const newRow = document.createElement('div');
     newRow.className = 'item-row';
     newRow.innerHTML = `
         <input type="text" placeholder="Item Description" required>
         <input type="number" placeholder="Quantity" min="1" required>
         <input type="number" placeholder="Unit Price" step="0.01" required>
-        <button type="button" onclick="removeItem(this)">Remove</button>
+        <button type="button" onclick="removeItem(this)" class="remove-btn">Remove</button>
     `;
-    container.appendChild(newRow);
+    itemsContainer.appendChild(newRow);
 }
 
 function removeItem(button) {
-    const row = button.parentElement;
-    if (document.getElementsByClassName('item-row').length > 1) {
-        row.remove();
+    const itemsContainer = document.getElementById('itemsContainer');
+    if (itemsContainer.children.length > 1) {
+        button.parentElement.remove();
+    } else {
+        alert('At least one item is required');
     }
+}
+
+function formatCurrency(amount) {
+    return parseFloat(amount).toFixed(2);
 }
 
 function formatDate(date) {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return date.toLocaleDateString(undefined, options);
+    return new Date(date).toLocaleDateString(undefined, options);
 }
 
 document.getElementById('invoiceForm').addEventListener('submit', function(e) {
@@ -30,15 +36,15 @@ document.getElementById('invoiceForm').addEventListener('submit', function(e) {
     const invoiceNumber = document.getElementById('invoiceNumber').value;
     const clientName = document.getElementById('clientName').value;
     const orderType = document.getElementById('orderType').value;
-    const paymentType = document.querySelector('input[name="paymentType"]:checked').value;
+    const paymentType = document.getElementById('paymentType').value;
+    const discount = parseFloat(document.getElementById('discount').value) || 0;
     
-    // Update invoice display
+    // Update invoice details
     document.getElementById('displayInvoiceNumber').textContent = invoiceNumber;
     document.getElementById('displayDate').textContent = formatDate(new Date());
-    document.getElementById('displayClientName').textContent = clientName;
-    document.getElementById('displayOrderType').textContent = 
-        orderType.charAt(0).toUpperCase() + orderType.slice(1) + ' Order';
+    document.getElementById('displayOrderType').textContent = orderType;
     document.getElementById('displayPaymentType').textContent = paymentType;
+    document.getElementById('displayClientName').textContent = clientName;
     
     // Process items
     const itemsContainer = document.getElementById('itemsContainer');
@@ -47,10 +53,12 @@ document.getElementById('invoiceForm').addEventListener('submit', function(e) {
     
     let subtotal = 0;
     
-    itemsContainer.querySelectorAll('.item-row').forEach(row => {
-        const description = row.querySelector('input[type="text"]').value;
-        const quantity = parseInt(row.querySelector('input[placeholder="Quantity"]').value);
-        const unitPrice = parseFloat(row.querySelector('input[placeholder="Unit Price"]').value);
+    // Add each item to the invoice
+    Array.from(itemsContainer.children).forEach(row => {
+        const inputs = row.getElementsByTagName('input');
+        const description = inputs[0].value;
+        const quantity = parseInt(inputs[1].value);
+        const unitPrice = parseFloat(inputs[2].value);
         const amount = quantity * unitPrice;
         subtotal += amount;
         
@@ -58,18 +66,24 @@ document.getElementById('invoiceForm').addEventListener('submit', function(e) {
         tr.innerHTML = `
             <td>${description}</td>
             <td>${quantity}</td>
-            <td>LKR ${unitPrice.toFixed(2)}</td>
-            <td>LKR ${amount.toFixed(2)}</td>
+            <td>LKR ${formatCurrency(unitPrice)}</td>
+            <td>LKR ${formatCurrency(amount)}</td>
         `;
         invoiceItems.appendChild(tr);
     });
     
-    // Update totals
-    document.getElementById('subtotal').textContent = subtotal.toFixed(2);
-    document.getElementById('total').textContent = subtotal.toFixed(2);
-    document.getElementById('amountDue').textContent = subtotal.toFixed(2);
+    // Calculate totals
+    const discountAmount = (subtotal * discount) / 100;
+    const total = subtotal - discountAmount;
+    const amountDue = total;
     
-    // Show invoice page
+    // Update totals display
+    document.getElementById('subtotal').textContent = formatCurrency(subtotal);
+    document.getElementById('discountAmount').textContent = formatCurrency(discountAmount);
+    document.getElementById('total').textContent = formatCurrency(total);
+    document.getElementById('amountDue').textContent = formatCurrency(amountDue);
+    
+    // Show invoice page and hide form
     document.querySelector('.form-container').style.display = 'none';
     document.getElementById('invoicePage').style.display = 'block';
 });

@@ -13,6 +13,11 @@ A simple, browser-based invoice generation system that allows users to create an
 - Professional invoice display format
 - Responsive design
 - Currency formatting in LKR (Sri Lankan Rupee)
+- **Dynamic Calculations**
+  - Automatic calculation of subtotals
+  - Optional percentage-based discount system
+  - Final total and amount due calculations
+  - All monetary values in LKR (Sri Lankan Rupee)
 
 ## Usage
 
@@ -23,14 +28,12 @@ A simple, browser-based invoice generation system that allows users to create an
    - Order type (dropdown selection)
    - Payment type (radio button selection)
 
-2. Add invoice items:
+2. Add items and discount:
 
-   - Click the "Add Item" button to create new item rows
-   - Each item requires:
-     - Item description
-     - Quantity
-     - Unit price
-   - Remove unwanted items using the "Remove" button (maintains at least one item)
+   - Click "Add Item" to add new items
+   - Enter item description, quantity, and unit price
+   - Optionally enter a discount percentage
+   - Remove items using the "Remove" button
 
 3. Generate invoice:
    - Submit the form to generate a professional invoice
@@ -125,3 +128,10 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 6. Implement invoice templates
 7. Add tax calculation options
 8. Include payment terms and due dates
+
+### Calculations
+
+- Subtotal: Sum of all item totals
+- Discount: Applied as a percentage to the subtotal
+- Total: Subtotal minus discount amount
+- Amount due: Final amount to be paid
