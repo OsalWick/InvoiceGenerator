@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales - Sun and Shade Clothing</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <img src="images/logo.png" alt="Sun and Shade Clothing Logo" class="nav-logo">
+            <span>Sun and Shade Clothing</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="invoice.html"><i class="fas fa-file-invoice"></i> Invoice</a></li>
+            <li><a href="contacts.html"><i class="fas fa-address-book"></i> Contacts</a></li>
+            <li><a href="loan.html"><i class="fas fa-calculator"></i> Loan Calculator</a></li>
+            <li><a href="sales.html" class="active"><i class="fas fa-chart-line"></i> Sales</a></li>
+            <li><a href="expenses.html"><i class="fas fa-receipt"></i> Expenses</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
+        <h1>Sales Records</h1>
+        <div class="card">
+            <div class="table-filters">
+                <input type="text" placeholder="Search..." class="search-input">
+                <select class="filter-select">
+                    <option value="all">All Time</option>
+                    <option value="today">Today</option>
+                    <option value="week">This Week</option>
+                    <option value="month">This Month</option>
+                </select>
+            </div>
+            
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Invoice #</th>
+                            <th scope="col">Customer</th>
+                            <th scope="col">Items</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2024-01-21</td>
+                            <td>INV-001</td>
+                            <td>John Doe</td>
+                            <td>5</td>
+                            <td>LKR 25,000</td>
+                            <td><span class="status-paid">Paid</span></td>
+                        </tr>
+                        <tr>
+                            <td>2024-01-20</td>
+                            <td>INV-002</td>
+                            <td>Jane Smith</td>
+                            <td>3</td>
+                            <td>LKR 15,000</td>
+                            <td><span class="status-pending">Pending</span></td>
+                        </tr>
+                        <!-- Add more sample rows as needed -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="common.js"></script>
+</body>
+</html>

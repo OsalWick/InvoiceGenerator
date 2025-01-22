@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expenses - Sun and Shade Clothing</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div id="header"></div>
+    
+    <div class="main-content">
+        <h1>Expenses</h1>
+        
+        <div class="summary-cards">
+            <div class="summary-card">
+                <h3>Total Expenses</h3>
+                <p class="amount">LKR 120,000</p>
+                <p class="period">This Month</p>
+            </div>
+            <div class="summary-card">
+                <h3>Highest Category</h3>
+                <p class="amount">Materials</p>
+                <p class="period">LKR 45,000</p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="table-filters">
+                <input type="text" placeholder="Search..." class="search-input">
+                <select class="filter-select">
+                    <option value="all">All Categories</option>
+                    <option value="materials">Materials</option>
+                    <option value="utilities">Utilities</option>
+                    <option value="rent">Rent</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Category</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Sample data -->
+                        <tr>
+                            <td>2024-01-21</td>
+                            <td>Materials</td>
+                            <td>Fabric Purchase</td>
+                            <td>LKR 15,000</td>
+                        </tr>
+                        <!-- Add more sample rows -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="common.js"></script>
+</body>
+</html> 

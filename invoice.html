@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sun and Shade Clothing - Invoice Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <img src="images/logo.png" alt="Sun and Shade Clothing Logo" class="nav-logo">
+            <span>Sun and Shade Clothing</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="invoice.html" class="active"><i class="fas fa-file-invoice"></i> Invoice</a></li>
+            <li><a href="contacts.html"><i class="fas fa-address-book"></i> Contacts</a></li>
+            <li><a href="loan.html"><i class="fas fa-calculator"></i> Loan Calculator</a></li>
+            <li><a href="sales.html"><i class="fas fa-chart-line"></i> Sales</a></li>
+            <li><a href="expenses.html"><i class="fas fa-receipt"></i> Expenses</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
+        <div class="container form-container">
+            <h1>Invoice Generator</h1>
+            <form id="invoiceForm">
+                <div class="form-group">
+                    <label for="invoiceNumber">Invoice Number:</label>
+                    <input type="text" id="invoiceNumber" required>
+                </div>
+                <div class="form-group">
+                    <label for="clientName">Client Name:</label>
+                    <input type="text" id="clientName" required>
+                </div>
+                <div class="form-group">
+                    <label for="orderType">Order Type:</label>
+                    <select id="orderType" required>
+                        <option value="normal">Normal Order</option>
+                        <option value="rush">Rush Order</option>
+                        <option value="large">Large Order</option>
+                        <option value="test">Test Order</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="paymentType">Payment Type:</label>
+                    <select id="paymentType" required>
+                        <option value="prePaid">Pre-Paid</option>
+                        <option value="paidOnDelivery">Paid-on-Delivery</option>
+                        <option value="paidOnTab">Paid-on-Tab</option>
+                        <option value="otherPayment">Other Payment</option>
+                    </select>
+                </div>
+
+                <h3>Items</h3>
+                <div id="itemsContainer" class="items-container">
+                    <div class="item-row">
+                        <input type="text" placeholder="Item Description" required>
+                        <select class="size-select" required>
+                            <optgroup label="Adult Sizes">
+                                <option value="S">S</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                                <option value="2XL">2XL</option>
+                                <option value="3XL">3XL</option>
+                                <option value="4XL">4XL</option>
+                                <option value="5XL">5XL</option>
+                            </optgroup>
+                            <optgroup label="Baby Sizes">
+                                <option value="B-S">B-S</option>
+                                <option value="B-M">B-M</option>
+                                <option value="B-L">B-L</option>
+                                <option value="B-XL">B-XL</option>
+                                <option value="B-2XL">B-2XL</option>
+                            </optgroup>
+                        </select>
+                        <input type="number" placeholder="Quantity" min="1" required>
+                        <input type="number" placeholder="Unit Price" step="0.01" required>
+                        <button type="button" onclick="removeItem(this)" class="remove-btn">Remove</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="discount">Discount (%):</label>
+                    <input type="number" id="discount" min="0" max="100" step="0.01" placeholder="Enter discount percentage">
+                </div>
+
+                <div class="form-buttons">
+                    <button type="button" onclick="addItem()" class="add-btn">Add Item</button>
+                    <button type="submit" class="generate-btn">Generate Invoice</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="container invoice-page" id="invoicePage" style="display: none;">
+            <div class="invoice-header">
+                <div class="header-grid">
+                    <div class="company-details">
+                        <h2>Sun and Shade Clothing</h2>
+                        <p>Email: ruwanmalikumarasena@gmail.com</p>
+                        <p>Tel: (+94) 777 311 356</p>
+                    </div>
+                    <div class="invoice-meta">
+                        <table class="meta-table">
+                            <tr>
+                                <td><strong>Invoice #:</strong></td>
+                                <td><span id="displayInvoiceNumber"></span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Date:</strong></td>
+                                <td><span id="displayDate"></span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Order Type:</strong></td>
+                                <td><span id="displayOrderType"></span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Payment:</strong></td>
+                                <td><span id="displayPaymentType"></span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="bill-to">
+                    <h3>Bill to:</h3>
+                    <p id="displayClientName"></p>
+                </div>
+            </div>
+
+            <table class="invoice-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Description</th>
+                        <th scope="col">Size</th>
+                        <th scope="col">Qty</th>
+                        <th scope="col">Price (LKR)</th>
+                        <th scope="col">Amount (LKR)</th>
+                    </tr>
+                </thead>
+                <tbody id="invoiceItems">
+                </tbody>
+            </table>
+
+            <div class="item-summary">
+                <p><strong>Total Quantity: <span id="totalQuantity">0</span></strong></p>
+            </div>
+
+            <div class="totals">
+                <p><strong>Subtotal: LKR <span id="subtotal">0.00</span></strong></p>
+                <p><strong>Discount: LKR <span id="discountAmount">0.00</span></strong></p>
+                <p><strong>Total: LKR <span id="total">0.00</span></strong></p>
+                <p><strong>Amount due: LKR <span id="amountDue">0.00</span></strong></p>
+            </div>
+
+            <button type="button" class="print-button" onclick="window.print()">Print</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
